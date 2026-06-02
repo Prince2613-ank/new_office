@@ -3,7 +3,7 @@
 This folder contains a browser viewer for:
 
 ```text
-new_house2nd_floor_khr_quality.glb
+new_house2nd_floor_khr_mesh_optimized.glb
 ```
 
 It displays the model on a satellite base map using CesiumJS. Set the exact site
@@ -44,7 +44,7 @@ This is a static site. The full folder must be hosted together:
 index.html
 styles.css
 main.js
-new_house2nd_floor_khr_quality.glb
+new_house2nd_floor_khr_mesh_optimized.glb
 netlify.toml
 ```
 
@@ -55,12 +55,4 @@ headers for the GLB file.
 Avoid GitHub Pages or Cloudflare Pages for this exact folder because the GLB is
 larger than their normal single-file upload limits.
 
-The current KHR quality GLB was generated from `new_house2nd_floor_updated.glb`
-with:
-
-```powershell
-gltf-transform optimize new_house2nd_floor_updated.glb new_house2nd_floor_khr_quality.glb --compress draco --simplify false --texture-compress auto --texture-size 4096
-```
-
-This output uses `KHR_draco_mesh_compression` and keeps geometry unsimplified for
-better visual quality.
+The viewer currently loads `new_house2nd_floor_khr_mesh_optimized.glb`.

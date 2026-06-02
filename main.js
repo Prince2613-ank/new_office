@@ -1,4 +1,4 @@
-const MODEL_URL = "./new_house2nd_floor_khr_quality.glb";
+const MODEL_URL = "./new_house2nd_floor_khr_mesh_optimized.glb";
 
 const placement = {
   latitude: 28.660825288456,
