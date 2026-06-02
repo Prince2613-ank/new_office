@@ -8,6 +8,43 @@ const placement = {
   scale: 1,
 };
 
+const cameraPresets = {
+  "second-floor": {
+    destination: {
+      x: 1248265.2877160413,
+      y: 5460140.498499097,
+      z: 3040964.6935627214,
+    },
+    direction: {
+      x: 0.36256492583430877,
+      y: -0.9212223637199105,
+      z: 0.14105329183348797,
+    },
+    up: {
+      x: 0.5668547205550337,
+      y: 0.3381218090767029,
+      z: 0.7512319002885676,
+    },
+  },
+  satellite: {
+    destination: {
+      x: 1248266.837783013,
+      y: 5460165.774975385,
+      z: 3040973.4030182445,
+    },
+    direction: {
+      x: 0.24538647669310115,
+      y: -0.9694216944378546,
+      z: -0.0026562020603112524,
+    },
+    up: {
+      x: 0.6225184456944012,
+      y: 0.15547442926377542,
+      z: 0.7670061842093128,
+    },
+  },
+};
+
 const statusText = document.querySelector("#status");
 const loaderPanel = document.querySelector("#loader");
 const progressBar = document.querySelector("#bar");
@@ -116,16 +153,20 @@ async function updateModel() {
 function zoomToModel() {
   if (!modelPrimitive && !loadingModel) return;
 
+  const preset = cameraPresets[activeView];
   viewer.camera.flyTo({
-    destination: Cesium.Cartesian3.fromDegrees(
-      placement.longitude,
-      placement.latitude,
-      Math.max(placement.height + 80, 70),
+    destination: new Cesium.Cartesian3(
+      preset.destination.x,
+      preset.destination.y,
+      preset.destination.z,
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(300),
-      pitch: Cesium.Math.toRadians(-38),
-      roll: 0,
+      direction: new Cesium.Cartesian3(
+        preset.direction.x,
+        preset.direction.y,
+        preset.direction.z,
+      ),
+      up: new Cesium.Cartesian3(preset.up.x, preset.up.y, preset.up.z),
     },
     duration: 0.8,
   });
