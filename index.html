@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geolocated House Model</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/cesium@1.118.0/Build/Cesium/Widgets/widgets.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://unpkg.com/cesium@1.118.0/Build/Cesium/Cesium.js"></script>
+  </head>
+  <body>
+    <main id="app">
+      <div id="map" aria-label="Satellite map with 3D house model"></div>
+
+      <section class="topbar" aria-label="Model controls">
+        <div>
+          <h1>New House 2nd Floor</h1>
+          <p id="status">Loading satellite map and model...</p>
+        </div>
+        <div class="actions">
+          <button id="satelliteButton" type="button" title="Show satellite basemap">
+            Satellite
+          </button>
+          <button id="secondFloorButton" type="button" title="Show or hide 2nd floor model">
+            2nd Floor
+          </button>
+        </div>
+      </section>
+
+      <div class="loader" id="loader">
+        <div class="loader__label">
+          <span>Loading model</span>
+          <span id="percent">0%</span>
+        </div>
+        <div class="loader__track">
+          <div class="loader__bar" id="bar"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
