@@ -8,22 +8,12 @@ const placement = {
   scale: 1,
 };
 
-const defaultView = { heading: 300, pitch: -38, height: 80 };
-
 const statusText = document.querySelector("#status");
 const loaderPanel = document.querySelector("#loader");
 const progressBar = document.querySelector("#bar");
 const percentText = document.querySelector("#percent");
 const satelliteButton = document.querySelector("#satelliteButton");
 const secondFloorButton = document.querySelector("#secondFloorButton");
-const debugToggle = document.querySelector("#debugToggle");
-const debugCard = document.querySelector("#debugCard");
-const debugClose = document.querySelector("#debugClose");
-const captureViewBtn = document.querySelector("#captureViewBtn");
-const applyViewBtn = document.querySelector("#applyViewBtn");
-const defHeadingInput = document.querySelector("#def-heading");
-const defPitchInput = document.querySelector("#def-pitch");
-const defHeightInput = document.querySelector("#def-height");
 
 Cesium.Ion.defaultAccessToken = "";
 
@@ -130,11 +120,11 @@ function zoomToModel() {
     destination: Cesium.Cartesian3.fromDegrees(
       placement.longitude,
       placement.latitude,
-      Math.max(placement.height + defaultView.height, 70),
+      Math.max(placement.height + 80, 70),
     ),
     orientation: {
-      heading: Cesium.Math.toRadians(defaultView.heading),
-      pitch: Cesium.Math.toRadians(defaultView.pitch),
+      heading: Cesium.Math.toRadians(300),
+      pitch: Cesium.Math.toRadians(-38),
       roll: 0,
     },
     duration: 0.8,
@@ -183,56 +173,6 @@ satelliteButton.addEventListener("click", () => {
 
 secondFloorButton.addEventListener("click", () => {
   setSecondFloorView();
-});
-
-// --- Debug card ---
-
-function updateDebugCamera() {
-  if (!debugCard.classList.contains("is-visible")) return;
-  const cam = viewer.camera;
-  const carto = cam.positionCartographic;
-  document.getElementById("dbg-heading").textContent =
-    Cesium.Math.toDegrees(cam.heading).toFixed(1) + "°";
-  document.getElementById("dbg-pitch").textContent =
-    Cesium.Math.toDegrees(cam.pitch).toFixed(1) + "°";
-  document.getElementById("dbg-roll").textContent =
-    Cesium.Math.toDegrees(cam.roll).toFixed(1) + "°";
-  document.getElementById("dbg-height").textContent =
-    carto.height.toFixed(1) + " m";
-  document.getElementById("dbg-lat").textContent =
-    Cesium.Math.toDegrees(carto.latitude).toFixed(6);
-  document.getElementById("dbg-lng").textContent =
-    Cesium.Math.toDegrees(carto.longitude).toFixed(6);
-}
-
-viewer.scene.postRender.addEventListener(updateDebugCamera);
-
-debugToggle.addEventListener("click", () => {
-  const open = debugCard.classList.toggle("is-visible");
-  debugToggle.classList.toggle("is-active", open);
-});
-
-debugClose.addEventListener("click", () => {
-  debugCard.classList.remove("is-visible");
-  debugToggle.classList.remove("is-active");
-});
-
-captureViewBtn.addEventListener("click", () => {
-  const cam = viewer.camera;
-  const carto = cam.positionCartographic;
-  defHeadingInput.value = Cesium.Math.toDegrees(cam.heading).toFixed(1);
-  defPitchInput.value = Cesium.Math.toDegrees(cam.pitch).toFixed(1);
-  defHeightInput.value = carto.height.toFixed(1);
-  defaultView.heading = parseFloat(defHeadingInput.value);
-  defaultView.pitch = parseFloat(defPitchInput.value);
-  defaultView.height = parseFloat(defHeightInput.value);
-});
-
-applyViewBtn.addEventListener("click", () => {
-  defaultView.heading = parseFloat(defHeadingInput.value) || defaultView.heading;
-  defaultView.pitch = parseFloat(defPitchInput.value) || defaultView.pitch;
-  defaultView.height = parseFloat(defHeightInput.value) || defaultView.height;
-  zoomToModel();
 });
 
 updateModel();
