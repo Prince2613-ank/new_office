@@ -27,8 +27,50 @@
           <button id="secondFloorButton" type="button" title="Show or hide 2nd floor model">
             2nd Floor
           </button>
+          <button id="debugToggle" type="button" title="Toggle debug panel">Debug</button>
         </div>
       </section>
+
+      <div class="debug-card" id="debugCard" aria-label="Debug panel">
+        <div class="debug-card__header">
+          <span>Debug</span>
+          <button class="debug-card__close" id="debugClose" type="button" title="Close debug panel">✕</button>
+        </div>
+
+        <div class="debug-section">
+          <div class="debug-section__title">Live Camera</div>
+          <div class="debug-grid">
+            <span class="debug-label">Heading</span><span class="debug-value" id="dbg-heading">—</span>
+            <span class="debug-label">Pitch</span><span class="debug-value" id="dbg-pitch">—</span>
+            <span class="debug-label">Roll</span><span class="debug-value" id="dbg-roll">—</span>
+            <span class="debug-label">Height</span><span class="debug-value" id="dbg-height">—</span>
+            <span class="debug-label">Lat</span><span class="debug-value" id="dbg-lat">—</span>
+            <span class="debug-label">Lng</span><span class="debug-value" id="dbg-lng">—</span>
+          </div>
+        </div>
+
+        <div class="debug-divider"></div>
+
+        <div class="debug-section">
+          <div class="debug-section__title">Default View</div>
+          <div class="debug-field">
+            <label class="debug-label" for="def-heading">Heading °</label>
+            <input type="number" id="def-heading" value="300" step="1" />
+          </div>
+          <div class="debug-field">
+            <label class="debug-label" for="def-pitch">Pitch °</label>
+            <input type="number" id="def-pitch" value="-38" step="1" />
+          </div>
+          <div class="debug-field">
+            <label class="debug-label" for="def-height">Height m</label>
+            <input type="number" id="def-height" value="80" step="5" />
+          </div>
+          <div class="debug-row">
+            <button id="captureViewBtn" type="button">Capture Current</button>
+            <button id="applyViewBtn" type="button">Fly to Default</button>
+          </div>
+        </div>
+      </div>
 
       <div class="loader" id="loader">
         <div class="loader__label">
