@@ -1,5 +1,5 @@
 const MODEL_URLS = {
-  "first-floor": "./new_house1st_floor_quality_preserved.glb",
+  "first-floor": "./new_house1st_floor_compressed.glb",
   "second-floor": "./new_house2nd_floor_compressed.glb",
 };
 
